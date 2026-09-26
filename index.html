@@ -1,148 +1,150 @@
-<!DOCTYPE html>
-<html lang="ru">
+<<!DOCTYPE html>
+    <html lang="ru">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ночная прогулка</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 20px;
-            box-sizing: border-box;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background-color: #f0f4f8;
-            /* Спокойный ночной фон */
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            overflow: hidden;
-            /* Чтобы экран не дёргался при побеге кнопки */
-        }
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        .container {
-            text-align: center;
-            width: 100%;
-            max-width: 400px;
-        }
+        <!-- Красивое превью для Telegram и WhatsApp -->
+        <meta property="og:title" content="Секретное приглашение 🌌">
+        <meta property="og:description" content="Открой это сообщение на мобильном телефоне...">
+        <meta property="og:type" content="website">
 
-        h1 {
-            color: #1a237e;
-            /* Цвет индиго */
-            font-size: 26px;
-            margin-bottom: 40px;
-            line-height: 1.4;
-        }
+        <title>Ночная прогулка</title>
+        <style>
+            body {
+                margin: 0;
+                padding: 20px;
+                box-sizing: border-box;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-height: 100vh;
+                background-color: #f0f4f8;
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+                overflow: hidden;
+            }
 
-        .buttons-area {
-            position: relative;
-            height: 350px;
-            /* Пространство для маневров кнопки */
-            width: 100%;
-        }
+            .container {
+                text-align: center;
+                width: 100%;
+                max-width: 400px;
+            }
 
-        .btn {
-            padding: 12px 28px;
-            font-size: 18px;
-            font-weight: 600;
-            border: none;
-            border-radius: 12px;
-            cursor: pointer;
-            position: absolute;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
+            h1 {
+                color: #1a237e;
+                font-size: 26px;
+                margin-bottom: 10px;
+                /* Уменьшил отступ, чтобы подзаголовок был ближе */
+                line-height: 1.4;
+            }
 
-        #yesBtn {
-            background-color: #4caf50;
-            color: white;
-            left: 15%;
-            top: 150px;
-        }
+            .subtitle {
+                color: #666;
+                /* Серый цвет для подзаголовка */
+                font-size: 16px;
+                font-style: italic;
+                margin-bottom: 40px;
+            }
 
-        #noBtn {
-            background-color: #f44336;
-            color: white;
-            left: 60%;
-            top: 150px;
-            transition: all 0.12s ease-out;
-            /* Плавный прыжок кнопки */
-            touch-action: none;
-            /* Важно для мобилок: отменяет стандартные жесты */
-        }
+            .buttons-area {
+                position: relative;
+                height: 350px;
+                width: 100%;
+            }
 
-        /* Экран успешного ответа */
-        .success-screen {
-            display: none;
-        }
+            .btn {
+                padding: 12px 28px;
+                font-size: 18px;
+                font-weight: 600;
+                border: none;
+                border-radius: 12px;
+                cursor: pointer;
+                position: absolute;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
 
-        .success-screen h2 {
-            color: #4caf50;
-            font-size: 32px;
-            margin-bottom: 15px;
-        }
+            #yesBtn {
+                background-color: #4caf50;
+                color: white;
+                left: 15%;
+                top: 150px;
+            }
 
-        .success-screen p {
-            font-size: 20px;
-            color: #555;
-            line-height: 1.5;
-        }
-    </style>
-</head>
+            #noBtn {
+                background-color: #f44336;
+                color: white;
+                left: 60%;
+                top: 150px;
+                transition: all 0.12s ease-out;
+                touch-action: none;
+            }
 
-<body>
+            .success-screen {
+                display: none;
+            }
 
-    <div class="container">
-        <!-- Главный экран с вопросом -->
-        <div id="quizScreen">
-            <h1>Пойдёшь ли ты со мной на ночную прогулку? 🌌</h1>
-            <div class="buttons-area">
-                <button id="yesBtn" class="btn">Да</button>
-                <button id="noBtn" class="btn">Нет</button>
+            .success-screen h2 {
+                color: #4caf50;
+                font-size: 32px;
+                margin-bottom: 15px;
+            }
+
+            .success-screen p {
+                font-size: 20px;
+                color: #555;
+                line-height: 1.5;
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <div class="container">
+            <!-- Главный экран с вопросом -->
+            <div id="quizScreen">
+                <h1>Пойдёшь ли ты со мной на ночную прогулку? 🌌</h1>
+                <div class="subtitle">(даже не пробуй выбрать нет 😉)</div>
+                <div class="buttons-area">
+                    <button id="yesBtn" class="btn">Да</button>
+                    <button id="noBtn" class="btn">Нет</button>
+                </div>
+            </div>
+
+            <!-- Экран после нажатия "Да" -->
+            <div id="successScreen" class="success-screen">
+                <h2>О, как я и ожидал! 😏</h2>
+                <p>Жду тебя после смены, обязательно проведу тебя до дома. ✨</p>
             </div>
         </div>
 
-        <!-- Экран после нажатия "Да" -->
-        <div id="successScreen" class="success-screen">
-            <h2>О, как я и ожидал! 😏</h2>
-            <p>Жду тебя после смены, обязательно проведу тебя до дома. ✨</p>
-        </div>
-    </div>
+        <script>
+            const noBtn = document.getElementById('noBtn');
+            const yesBtn = document.getElementById('yesBtn');
+            const quizScreen = document.getElementById('quizScreen');
+            const successScreen = document.getElementById('successScreen');
 
-    <script>
-        const noBtn = document.getElementById('noBtn');
-        const yesBtn = document.getElementById('yesBtn');
-        const quizScreen = document.getElementById('quizScreen');
-        const successScreen = document.getElementById('successScreen');
+            function moveButton() {
+                const randomX = Math.floor(Math.random() * 75) + 5;
+                const randomY = Math.floor(Math.random() * 80) + 10;
+                noBtn.style.left = randomX + '%';
+                noBtn.style.top = randomY + 'px';
+            }
 
-        // Функция перемещения кнопки "Нет"
-        function moveButton() {
-            // Генерируем случайные координаты внутри зоны кнопок
-            // Ограничиваем от 5% до 80%, чтобы кнопка не улетала за экран смартфона
-            const randomX = Math.floor(Math.random() * 75) + 5;
-            const randomY = Math.floor(Math.random() * 80) + 10;
+            noBtn.addEventListener('mouseenter', moveButton);
 
-            noBtn.style.left = randomX + '%';
-            noBtn.style.top = randomY + 'px';
-        }
+            noBtn.addEventListener('touchstart', function (e) {
+                e.preventDefault();
+                moveButton();
+            });
+            noBtn.addEventListener('click', moveButton);
 
-        // События для ПК (наведение мышки)
-        noBtn.addEventListener('mouseenter', moveButton);
+            yesBtn.addEventListener('click', function () {
+                quizScreen.style.display = 'none';
+                successScreen.style.display = 'block';
+            });
+        </script>
 
-        // События для Телефонов (касание экрана)
-        noBtn.addEventListener('touchstart', function (e) {
-            e.preventDefault(); // Запрещаем стандартный клик телефона
-            moveButton();
-        });
-        noBtn.addEventListener('click', moveButton);
+    </body>
 
-        // Когда нажали "Да"
-        yesBtn.addEventListener('click', function () {
-            quizScreen.style.display = 'none'; // Прячем вопрос
-            successScreen.style.display = 'block'; // Показываем текст
-        });
-    </script>
-
-</body>
-
-</html>
+    </html>
